@@ -1,0 +1,102 @@
+# Install Rustup
+curl https://sh.rustup.rs | bash
+rustup doc --book
+
+sudo apt-get update
+sudo apt-get install git
+
+sudo apt install build-essential
+curl -L https://git.io/install-rustlings | bash
+rustlings watch
+
+# Install Docker and Docker Engine
+
+-- UNINSTALL
+sudo apt-get remove docker docker-engine docker.io containerd runc
+sudo apt-get purge docker-ce docker-ce-cli containerd.io
+sudo rm -rf /var/lib/docker
+sudo rm -rf /var/lib/containerd
+
+-- INSTALL REPO
+ sudo apt-get update
+ sudo apt-get install \
+    ca-certificates \
+    curl \
+    gnupg \
+    lsb-release
+-- DOCKER OFFICIAL KEY
+ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+
+-- SETUP STABLE REPO
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
+  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+-- DOCKER ENGINE
+sudo apt-get update
+sudo apt-get install docker-ce docker-ce-cli containerd.io
+
+sudo docker run hello-world
+-- POST-INTSTALLATION
+
+sudo groupadd docker
+sudo usermod -aG docker $USER
+
+// Log out and run below
+newgrp docker
+docker run hello-world
+
+-- START ON BOOT
+sudo systemctl enable docker.service
+sudo systemctl enable containerd.service
+
+
+# DOCKER ENGINE
+-- DOWNLOAD STABLE RELEASE
+sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compos
+
+-- APPLY EXECUTABLE PERMISSIONS
+sudo chmod +x /usr/local/bin/docker-compose
+
+# COMMAND COMPLETETION
+-- BASH
+sudo curl \
+    -L https://raw.githubusercontent.com/docker/compose/1.29.2/contrib/completion/bash/docker-compose \
+    -o /etc/bash_completion.d/docker-compose
+
+-- Zsh
+- oh-my-zsh
+sudo apt-get update
+sudo apt-get install zsh
+sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+plugins=(... docker docker-compose)
+
+ ~/.docker/config.json  -->   Namely credsStore instead of credStore.
+
+# LocalTerra
+git clon https://github.com/terra-project/localterra
+
+# Terrain Dev
+git clone --branch v0.5.2 --depth 1 https://github.com/terra-money/localterra
+
+localterra > docker compose up
+
+# Config wasm32
+rustup default stable
+rustup target add wasm32-unkown-unkown
+
+cargo install cargo-generate --features vendored-openssl
+cargo install cargo-run-script
+
+# Install NVM
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+
+# Install Node
+nvm install 16
+
+# Terrain
+- Install
+npm install -g @iboss/terrain
+-- new APP
+terrain new raffle-dapp
